@@ -1,0 +1,196 @@
+
+
+.container {
+    background-color: red;
+    width: 500px;
+    height: 700px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 2fr 1fr repeat(5, 2fr);
+    grid-template-areas: 
+        "equation equation equation equation equation"
+        "display display display display display"
+        "content-left content-left content-right content-right content-right"
+        "allClear clear plusMinus exponent square"
+        "seven eight nine multiplication sqrt"
+        "four five six division factorial"
+        "one two three subtraction equals"
+        "doubleZero zero decimal addition equals";
+    margin: 1em auto;
+    padding: 1em 1em 2em 1em;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
+.super {
+    padding-bottom: 1em;
+}
+
+.minusAdjust {
+    padding-left: 0.5rem;
+    font-size: 2rem;
+}
+
+.equation {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 1em;
+    margin: 0.5em 0.5em 0 0.5em;
+    grid-area: equation;
+    background-color: blue;
+}
+
+.display {
+    font-size: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 1rem;
+    margin: 0 0.5rem 0.5rem 0.5rem;
+    grid-area: display;
+    background-color: blue;
+}
+
+.contentLeft {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0.5em;
+    grid-area: content-left;
+}
+
+.contentRight {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0.5em;
+    padding-right: 1em;
+    grid-area: content-right;
+}
+
+#allClear {
+    grid-area: allClear;
+    background-color: lightblue;
+}
+
+#clear {
+    grid-area: clear;
+    background-color: lightblue;
+}
+
+#plusMinus {
+    grid-area: plusMinus;
+    background-color: lightblue;
+}
+
+#exponent {
+    grid-area: exponent;
+    background-color: lightblue;
+}
+
+#square {
+    grid-area: square;
+    background-color: lightblue;
+}
+
+#seven {
+    grid-area: seven;
+    background-color: lightblue;
+}
+
+#eight {
+    grid-area: eight;
+    background-color: lightblue;
+}
+
+#nine {
+    grid-area: nine;
+    background-color: lightblue;
+}
+
+#multiplication {
+    grid-area: multiplication;
+    background-color: lightblue;
+}
+
+#sqrt {
+    grid-area: sqrt;
+    background-color: lightblue;
+}
+
+#four {
+    grid-area: four;
+    background-color: lightblue;
+}
+
+#five {
+    grid-area: five;
+    background-color: lightblue;
+}
+
+#six {
+    grid-area: six;
+    background-color: lightblue;
+}
+
+#division {
+    grid-area: division;
+    background-color: lightblue;
+}
+
+#factorial {
+    grid-area: factorial;
+    background-color: lightblue;
+}
+
+#one {
+    grid-area: one;
+    background-color: lightblue;
+}
+
+#two {
+    grid-area: two;
+    background-color: lightblue;
+}
+
+#three {
+    grid-area: three;
+    background-color: lightblue;
+}
+
+#subtraction {
+    grid-area: subtraction;
+    background-color: lightblue;
+}
+
+#doubleZero {
+    grid-area: doubleZero;
+    background-color: lightblue;
+}
+
+#zero {
+    grid-area: zero;
+    background-color: lightblue;
+}
+
+#decimal {
+    grid-area: decimal;
+    background-color: lightblue;
+}
+
+#addition {
+    grid-area: addition;
+    background-color: lightblue;
+}
+
+#equals {
+    grid-area: equals;
+    background-color: gold;
+}
