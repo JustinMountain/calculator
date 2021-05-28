@@ -1,10 +1,66 @@
 // Parameters
 let displayValue = "";
+let numHolder = "";
+let resHolder = "";
+let functionHolder = "";
+
+// Math Buttons
+const squareButton = document.getElementById("square");
+squareButton.addEventListener('click', event => {
+    const display = document.getElementById("displayNumber");
+    // call square() with displayNumber
+    let result = square(display.textContent);
+    // push to equation space
+    populateEquation(display.textContent, square);
+    // push answer to displayNumber
+    clearDisplay();
+    populateDisplay(result);
+});
+
+const sqrtButton = document.getElementById("sqrt");
+sqrtButton.addEventListener('click', event => {
+    const display = document.getElementById("displayNumber");
+    let result = squareroot(display.textContent);
+    populateEquation(display.textContent, squareroot);
+    clearDisplay();
+    populateDisplay(result);
+});
+
+const factorialButton = document.getElementById("factorial");
+factorialButton.addEventListener('click', event => {
+    const display = document.getElementById("displayNumber");
+    let result = factorial(display.textContent);
+    populateEquation(display.textContent, factorial);
+    clearDisplay();
+    populateDisplay(result);
+});
+
+const plusMinusButton = document.getElementById("plusMinus");
+plusMinusButton.addEventListener('click', event => {
+    const display = document.getElementById("displayNumber");
+
+    if (display.textContent == "0") {
+        return;
+    } else {
+        let result = display.textContent* (-1);
+        clearDisplay();
+        populateDisplay(result);    
+    }
+});
+
+// Clear buttons
+const clearButton = document.getElementById("clear");
+clearButton.addEventListener('click', event => {
+    clearDisplay();
+});
+
+const allClearButton = document.getElementById("allClear");
+allClearButton.addEventListener('click', event => {
+    clearEquation();
+    clearDisplay();
+});
 
 // Number Buttons
-
-// Need condition to not add 0 to the start of the string
-// Need condition to only add 1 decimal point
 
 const oneButton = document.getElementById("one");
 oneButton.addEventListener('click', event => {
@@ -53,18 +109,33 @@ nineButton.addEventListener('click', event => {
 
 const zeroButton = document.getElementById("zero");
 zeroButton.addEventListener('click', event => { 
-    populateDisplay(0);
+    // if display string is empty do nothing, otherwise populate one 0
+    const display = document.getElementById("displayNumber");
+    if (display.textContent == "0") {
+        return;
+    } else {
+        populateDisplay(0);
+    }
 });
 
 const doubleZeroButton = document.getElementById("doubleZero");
 doubleZeroButton.addEventListener('click', event => {
-    populateDisplay(0);
-    populateDisplay(0);
-});
+    // if display string is empty do nothing, otherwise populate two 0's
+    const display = document.getElementById("displayNumber");
+    if (display.textContent == "0") {
+        return;
+    } else {
+        populateDisplay(0);
+        populateDisplay(0);
+    }});
 
 const decimalButton = document.getElementById("decimal");
 decimalButton.addEventListener('click', event => {
-    populateDisplay(".");
+    // if string doesn't contain "." populate, else do nothing
+    const display = document.getElementById("displayNumber");
+    if (!display.textContent.includes(".")) {
+        populateDisplay(".");
+    } else { return; }
 });
 
 // Math Functions 
@@ -127,10 +198,26 @@ function operate(...args) {
     return operation(...nums);
 }
 
-// Populate display areas
+// Populate and clear display areas
+function clearDisplay() {
+    const display = document.getElementById("displayNumber");
+    display.textContent = "0";
+}
+
 function populateDisplay(num) {
     const display = document.getElementById("displayNumber");
-    display.textContent += num;
+    if (display.textContent == "0" && num == ".") {
+        display.textContent += num;
+    } else if (display.textContent == "0") {
+        display.textContent = num;
+    } else {
+        display.textContent += num;
+    }
+}
+
+function clearEquation() {
+    const equation = document.getElementById("equationDisplay");
+    equation.textContent = "";
 }
 
 function populateEquation(num, operation) {
