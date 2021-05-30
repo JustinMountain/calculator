@@ -9,7 +9,6 @@ let newResult = true;
 const multipButton = document.getElementById("multiplication");
 multipButton.addEventListener('click', event => {
     const display = document.getElementById("displayNumber");
-
     if (!firstNumber) {
         firstNumber = parseFloat(display.textContent);
         functionHolder = multiplication;
@@ -33,7 +32,6 @@ multipButton.addEventListener('click', event => {
 const divideButton = document.getElementById("division");
 divideButton.addEventListener('click', event => {
     const display = document.getElementById("displayNumber");
-
     if (!firstNumber) {
         firstNumber = parseFloat(display.textContent);
         functionHolder = division;
@@ -56,7 +54,6 @@ divideButton.addEventListener('click', event => {
 const minusButton = document.getElementById("subtraction");
 minusButton.addEventListener('click', event => {
     const display = document.getElementById("displayNumber");
-
     if (!firstNumber) {
         firstNumber = parseFloat(display.textContent);
         functionHolder = subtraction;
@@ -79,7 +76,6 @@ minusButton.addEventListener('click', event => {
 const addButton = document.getElementById("addition");
 addButton.addEventListener('click', event => {
     const display = document.getElementById("displayNumber");
-
     if (!firstNumber) {
         firstNumber = parseFloat(display.textContent);
         functionHolder = addition;
@@ -102,7 +98,6 @@ addButton.addEventListener('click', event => {
 const exponentButton = document.getElementById("exponent");
 exponentButton.addEventListener('click', event => {
     const display = document.getElementById("displayNumber");
-
     if (!firstNumber) {
         firstNumber = parseFloat(display.textContent);
         functionHolder = exponent;
@@ -157,7 +152,8 @@ sqrtButton.addEventListener('click', event => {
         secondNumber = "";
         functionHolder = squareroot;
         returnResults();
-    }});
+    }
+});
 
 const factorialButton = document.getElementById("factorial");
 factorialButton.addEventListener('click', event => {
@@ -175,12 +171,12 @@ factorialButton.addEventListener('click', event => {
         secondNumber = "";
         functionHolder = factorial;
         returnResults();
-    }});
+    }
+});
 
 const plusMinusButton = document.getElementById("plusMinus");
 plusMinusButton.addEventListener('click', event => {
     const display = document.getElementById("displayNumber");
-
     if (display.textContent == "0") {
         return;
     } else {
@@ -209,6 +205,194 @@ allClearButton.addEventListener('click', event => {
     clearEquation();
     clearDisplay();
 });
+
+// Keyboard Support
+document.addEventListener('keydown', keyboardSupport);
+
+function keyboardSupport(e) {
+    console.log(e);
+    if (e.key == "Enter") { returnResults(); }
+    else if (e.key == 1) { populateDisplay(1); }
+    else if (e.key == 2) { populateDisplay(2); }
+    else if (e.key == 3) { populateDisplay(3); }
+    else if (e.key == 4) { populateDisplay(4); }
+    else if (e.key == 5) { populateDisplay(5); }
+    else if (e.key == 6) { populateDisplay(6); }
+    else if (e.key == 7) { populateDisplay(7); }
+    else if (e.key == 8) { populateDisplay(8); }
+    else if (e.key == 9) { populateDisplay(9); }
+    else if (e.key == 0) { populateDisplay(0); }
+    else if (e.key == "Backspace") { 
+        clearDisplay();
+    }
+    else if (e.key == "~") { 
+        const display = document.getElementById("displayNumber");
+        if (display.textContent == "0") {
+            return;
+        } else {
+            let result = display.textContent* (-1);
+            clearDisplay();
+            populateDisplay(result);    
+        }
+    }
+    else if (e.key == "s") { 
+        const display = document.getElementById("displayNumber");
+        if (!firstNumber) {
+            firstNumber = parseFloat(display.textContent);
+            secondNumber = "";
+            functionHolder = square;
+            returnResults();
+        } else {
+            if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+                returnResults();
+            }
+            firstNumber = parseFloat(display.textContent);
+            secondNumber = "";
+            functionHolder = square;
+            returnResults();
+        }
+    }
+    else if (e.key == "r") { 
+        const display = document.getElementById("displayNumber");
+        if (!firstNumber) {
+            firstNumber = parseFloat(display.textContent);
+            secondNumber = "";
+            functionHolder = squareroot;
+            returnResults();
+        } else {
+            if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+                returnResults();
+            }
+            firstNumber = parseFloat(display.textContent);
+            secondNumber = "";
+            functionHolder = squareroot;
+            returnResults();
+        }
+    }
+    else if (e.key == "Escape") { 
+        firstNumber = "";
+        secondNumber = "";
+        functionHolder = "";
+        clearEquation();
+        clearDisplay();
+    }
+    else if (e.key == "!") { 
+        const display = document.getElementById("displayNumber");
+        if (!firstNumber) {
+            firstNumber = parseFloat(display.textContent);
+            secondNumber = "";
+            functionHolder = factorial;
+            returnResults();
+        } else {
+            if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+                returnResults();
+            }
+            firstNumber = parseFloat(display.textContent);
+            secondNumber = "";
+            functionHolder = factorial;
+            returnResults();
+        }    
+    }
+    else if (e.key == "^") { 
+        const display = document.getElementById("displayNumber");
+
+        if (!firstNumber) {
+            firstNumber = parseFloat(display.textContent);
+            functionHolder = exponent;
+            populateEquation(firstNumber, "^ ");
+            clearDisplay();
+        } else if (firstNumber && functionHolder && display.textContent == "0") {
+            functionHolder = exponent;
+            populateEquation(firstNumber, "^ ");
+        } else {
+            if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+                returnResults();
+            }
+            firstNumber = parseFloat(display.textContent);
+            functionHolder = exponent;
+            populateEquation(firstNumber, "^ ");
+            clearDisplay();
+        }    
+    }    
+    else if (e.key == "+") { 
+        const display = document.getElementById("displayNumber");
+        if (!firstNumber) {
+            firstNumber = parseFloat(display.textContent);
+            functionHolder = addition;
+            populateEquation(firstNumber, " + ");
+            clearDisplay();
+        } else if (firstNumber && functionHolder && display.textContent == "0") {
+            functionHolder = addition;
+            populateEquation(firstNumber, " + ");
+        } else {
+            if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+                returnResults();
+            }
+            firstNumber = display.textContent;
+            functionHolder = addition;
+            populateEquation(firstNumber, " + ");
+            clearDisplay();
+        }    
+    } else if (e.key == "-") { 
+        const display = document.getElementById("displayNumber");
+        if (!firstNumber) {
+            firstNumber = parseFloat(display.textContent);
+            functionHolder = subtraction;
+            populateEquation(firstNumber, " - ");
+            clearDisplay();
+        } else if (firstNumber && functionHolder && display.textContent == "0") {
+            functionHolder = subtraction;
+            populateEquation(firstNumber, " - ");
+        } else {
+            if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+                returnResults();
+            }
+            firstNumber = parseFloat(display.textContent);
+            functionHolder = subtraction;
+            populateEquation(firstNumber, " - ");
+            clearDisplay();
+        }    
+    } else if (e.key == "*") { 
+        const display = document.getElementById("displayNumber");
+        if (!firstNumber) {
+            firstNumber = parseFloat(display.textContent);
+            functionHolder = multiplication;
+            populateEquation(firstNumber, " * ");
+            clearDisplay();
+        } else if (firstNumber && functionHolder && display.textContent == "0") {
+            // Failsafe for incorrect function called
+            functionHolder = multiplication;
+            populateEquation(firstNumber, " * ");
+        } else {
+            if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+                returnResults();
+            }
+            firstNumber = parseFloat(display.textContent);
+            functionHolder = multiplication;
+            populateEquation(firstNumber, " * ");
+            clearDisplay();
+        }    
+    } else if (e.key == "/") { 
+        const display = document.getElementById("displayNumber");
+        if (!firstNumber) {
+            firstNumber = parseFloat(display.textContent);
+            functionHolder = division;
+            populateEquation(firstNumber, " / ");
+            clearDisplay();
+        } else if (firstNumber && functionHolder && display.textContent == "0") {
+            functionHolder = division;
+            populateEquation(firstNumber, " / ");
+        } else {
+            if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+                returnResults();
+            }
+            firstNumber = parseFloat(display.textContent);
+            functionHolder = division;
+            populateEquation(firstNumber, " / ");
+            clearDisplay();
+        }    
+    }
+};
 
 // Number Buttons
 

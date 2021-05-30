@@ -3,11 +3,14 @@ TODO:
   - Setup a check on populateEquation for string.length
   - Round long decimal points
   - These two may need special interaction coded depending on length of the int before "."
-- Add keyboard support
 - Make beautiful
   - Add stacked previous executions in hidden overflow divs?
+BUG: Number, followed by an operation, followed by equals*2 results in NaN
+    - likely something wrong with returnResults();
+      - Indeed it does: I reset firstNumber and secondNumber to avoid unexpected recursion, but it causes this issue (line 575)
 
 2021-05-30
+- Added keyboard support
 - Fixed bug: Unable to make a correction if the wrong button is pushed
 - Fixed bug: Unable execute O! O^2 or root0 
   - There was an if statement looking for !firstNumber, which returned false with firstNumber = 0, preventing the functions from continuing)
