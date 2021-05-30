@@ -1,24 +1,26 @@
 TODO:
-- Add functionality to (equal)
-  - Call operate(function, display.textContent, num2)
-    - Above adds flexibility for both types of functions
-    - Needs case of function held and no function held
-    - Needs to call populateEquation()
-    - Needs to populate results in display.textContent
-  - Add functionality to remaining functions
-    - Need to check if already holding a number, if so then call operate
-      - This can't continue if display.textContent = 0
-    - Display to numHolder, function pushed to functionHolder, populateEquation, clearDisplay
-    * Addition will conflict with concatination, need to change strings to floats
-- Ensure necessary variables are cleared on clear buttons
-- Disallow squareroot of negative numbers
-- Fix huge decimal points
-- Create limit for number of digits
+- Fix huge decimal points / Create limit for number of digits
+  - Setup a check on populateEquation for string.length
+  - Round long decimal points
+  - These two may need special interaction coded depending on length of the int before "."
+- Add keyboard support
 - Make beautiful
-  - Add fade out to equation space for square, sqrt, factorial?
-    - Add stacked previous executions in hidden overflow divs?
+  - Add stacked previous executions in hidden overflow divs?
 
-* There is an issue with new inputs concating to display.textContent after executing rather than replacing the display.textContent (need to setup a Boolean?)
+2021-05-30
+- Fixed bug: Unable to make a correction if the wrong button is pushed
+- Fixed bug: Unable execute O! O^2 or root0 
+  - There was an if statement looking for !firstNumber, which returned false with firstNumber = 0, preventing the functions from continuing)
+- Resized default styling to fit on mobile
+- Added placeholder Easter Eggs for dividing by 0 and squareroot negative numbers
+- Removed the decimal if it's the last character in the string via parseFloat
+- Core functionality established on all buttons
+  - The problem with addition/concatination was much simpler than I expected it to be (parseFloat)
+- Setup the Boolean newResult to properly concat new display strings after the execution of a function
+NOTE: There were a lot of tribulations; I found that I have had to go back and forth through the code a number of times to fix mistakes or make alterations in order to get the behaviour that I wanted/expected. I can see how proper planning and a complete understanding of the order of operations will really make a difference as projects continue to get more complex.
+
+2021-05-29
+- Added function to returnResults and attached to equalsButton
 
 2021-05-28
 - First attempts at other functions

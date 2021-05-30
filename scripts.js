@@ -1,39 +1,181 @@
 // Parameters
 let displayValue = "";
-let numHolder = "";
-let resHolder = "";
+let firstNumber = "";
+let secondNumber = "";
 let functionHolder = "";
+let newResult = true;
 
 // Math Buttons
+const multipButton = document.getElementById("multiplication");
+multipButton.addEventListener('click', event => {
+    const display = document.getElementById("displayNumber");
+
+    if (!firstNumber) {
+        firstNumber = parseFloat(display.textContent);
+        functionHolder = multiplication;
+        populateEquation(firstNumber, " * ");
+        clearDisplay();
+    } else if (firstNumber && functionHolder && display.textContent == "0") {
+        // Failsafe for incorrect function called
+        functionHolder = multiplication;
+        populateEquation(firstNumber, " * ");
+    } else {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+            returnResults();
+        }
+        firstNumber = parseFloat(display.textContent);
+        functionHolder = multiplication;
+        populateEquation(firstNumber, " * ");
+        clearDisplay();
+    }
+});
+
+const divideButton = document.getElementById("division");
+divideButton.addEventListener('click', event => {
+    const display = document.getElementById("displayNumber");
+
+    if (!firstNumber) {
+        firstNumber = parseFloat(display.textContent);
+        functionHolder = division;
+        populateEquation(firstNumber, " / ");
+        clearDisplay();
+    } else if (firstNumber && functionHolder && display.textContent == "0") {
+        functionHolder = division;
+        populateEquation(firstNumber, " / ");
+    } else {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+            returnResults();
+        }
+        firstNumber = parseFloat(display.textContent);
+        functionHolder = division;
+        populateEquation(firstNumber, " / ");
+        clearDisplay();
+    }
+});
+
+const minusButton = document.getElementById("subtraction");
+minusButton.addEventListener('click', event => {
+    const display = document.getElementById("displayNumber");
+
+    if (!firstNumber) {
+        firstNumber = parseFloat(display.textContent);
+        functionHolder = subtraction;
+        populateEquation(firstNumber, " - ");
+        clearDisplay();
+    } else if (firstNumber && functionHolder && display.textContent == "0") {
+        functionHolder = subtraction;
+        populateEquation(firstNumber, " - ");
+    } else {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+            returnResults();
+        }
+        firstNumber = parseFloat(display.textContent);
+        functionHolder = subtraction;
+        populateEquation(firstNumber, " - ");
+        clearDisplay();
+    }
+});
+
+const addButton = document.getElementById("addition");
+addButton.addEventListener('click', event => {
+    const display = document.getElementById("displayNumber");
+
+    if (!firstNumber) {
+        firstNumber = parseFloat(display.textContent);
+        functionHolder = addition;
+        populateEquation(firstNumber, " + ");
+        clearDisplay();
+    } else if (firstNumber && functionHolder && display.textContent == "0") {
+        functionHolder = addition;
+        populateEquation(firstNumber, " + ");
+    } else {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+            returnResults();
+        }
+        firstNumber = display.textContent;
+        functionHolder = addition;
+        populateEquation(firstNumber, " + ");
+        clearDisplay();
+    }
+});
+
+const exponentButton = document.getElementById("exponent");
+exponentButton.addEventListener('click', event => {
+    const display = document.getElementById("displayNumber");
+
+    if (!firstNumber) {
+        firstNumber = parseFloat(display.textContent);
+        functionHolder = exponent;
+        populateEquation(firstNumber, "^ ");
+        clearDisplay();
+    } else if (firstNumber && functionHolder && display.textContent == "0") {
+        functionHolder = exponent;
+        populateEquation(firstNumber, "^ ");
+    } else {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+            returnResults();
+        }
+        firstNumber = parseFloat(display.textContent);
+        functionHolder = exponent;
+        populateEquation(firstNumber, "^ ");
+        clearDisplay();
+    }
+});
+
 const squareButton = document.getElementById("square");
 squareButton.addEventListener('click', event => {
     const display = document.getElementById("displayNumber");
-    // call square() with displayNumber
-    let result = square(display.textContent);
-    // push to equation space
-    populateEquation(display.textContent, square);
-    // push answer to displayNumber
-    clearDisplay();
-    populateDisplay(result);
+    if (!firstNumber) {
+        firstNumber = parseFloat(display.textContent);
+        secondNumber = "";
+        functionHolder = square;
+        returnResults();
+    } else {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+            returnResults();
+        }
+        firstNumber = parseFloat(display.textContent);
+        secondNumber = "";
+        functionHolder = square;
+        returnResults();
+    }
 });
 
 const sqrtButton = document.getElementById("sqrt");
 sqrtButton.addEventListener('click', event => {
     const display = document.getElementById("displayNumber");
-    let result = squareroot(display.textContent);
-    populateEquation(display.textContent, squareroot);
-    clearDisplay();
-    populateDisplay(result);
-});
+    if (!firstNumber) {
+        firstNumber = parseFloat(display.textContent);
+        secondNumber = "";
+        functionHolder = squareroot;
+        returnResults();
+    } else {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+            returnResults();
+        }
+        firstNumber = parseFloat(display.textContent);
+        secondNumber = "";
+        functionHolder = squareroot;
+        returnResults();
+    }});
 
 const factorialButton = document.getElementById("factorial");
 factorialButton.addEventListener('click', event => {
     const display = document.getElementById("displayNumber");
-    let result = factorial(display.textContent);
-    populateEquation(display.textContent, factorial);
-    clearDisplay();
-    populateDisplay(result);
-});
+    if (!firstNumber) {
+        firstNumber = parseFloat(display.textContent);
+        secondNumber = "";
+        functionHolder = factorial;
+        returnResults();
+    } else {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+            returnResults();
+        }
+        firstNumber = parseFloat(display.textContent);
+        secondNumber = "";
+        functionHolder = factorial;
+        returnResults();
+    }});
 
 const plusMinusButton = document.getElementById("plusMinus");
 plusMinusButton.addEventListener('click', event => {
@@ -48,6 +190,11 @@ plusMinusButton.addEventListener('click', event => {
     }
 });
 
+const equalsButton = document.getElementById("equals");
+equalsButton.addEventListener('click', event => {
+    returnResults();
+});
+
 // Clear buttons
 const clearButton = document.getElementById("clear");
 clearButton.addEventListener('click', event => {
@@ -56,6 +203,9 @@ clearButton.addEventListener('click', event => {
 
 const allClearButton = document.getElementById("allClear");
 allClearButton.addEventListener('click', event => {
+    firstNumber = "";
+    secondNumber = "";
+    functionHolder = "";
     clearEquation();
     clearDisplay();
 });
@@ -139,11 +289,13 @@ decimalButton.addEventListener('click', event => {
 });
 
 // Math Functions 
-function addition(num1, num2) {
+function addition(num2, num1) {
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
     return num1 + num2;
 }
 
-function subtraction(num1, num2) {
+function subtraction(num2, num1) {
     return num1 - num2;
 }
 
@@ -151,9 +303,9 @@ function multiplication(num1, num2) {
     return num1 * num2;
 }
 
-function division(num1, num2) {
+function division(num2, num1) {
     if (num2 == 0) {
-        return "ERROR"
+        return "ERROR" // Add Easter Egg
     } else { return num1 / num2; }
 }
 
@@ -165,7 +317,7 @@ function squareroot(num1) {
     return Math.sqrt(num1);
 }
 
-function exponent(num1, num2) {
+function exponent(num2, num1) {
     return num1 ** num2;
 }
 
@@ -198,20 +350,76 @@ function operate(...args) {
     return operation(...nums);
 }
 
+function returnResults() {
+    
+    const display = document.getElementById("displayNumber");
+
+    if (!functionHolder) {
+        firstNumber = parseFloat(display.textContent);
+        populateEquation(firstNumber);
+        clearDisplay();
+    } else {
+        secondNumber = firstNumber;
+        firstNumber = parseFloat(display.textContent);
+
+        if (functionHolder == multiplication) { symbol = " * "}
+        else if (functionHolder == division) { symbol = " / "}
+        else if (functionHolder == subtraction) { symbol = " - "}
+        else if (functionHolder == addition) { symbol = " + "}
+        else if (functionHolder == square) { symbol = "^2"}
+        else if (functionHolder == squareroot) { symbol = "√"}
+        else if (functionHolder == factorial) { symbol = "!"}
+        else if (functionHolder == exponent) { symbol = "^ "}
+
+        let result = operate(functionHolder, firstNumber, secondNumber);
+
+        // Populate the equation 
+        if (functionHolder == square || functionHolder == factorial) {
+            populateEquation(firstNumber, symbol);
+        } else if (functionHolder == squareroot) {
+            populateEquation(symbol, firstNumber);
+        } else {
+            populateEquation(secondNumber, symbol, firstNumber, " = ", result);
+        }
+        clearDisplay();
+        if (functionHolder == squareroot && firstNumber < 0) {
+            const display = document.getElementById("displayNumber");
+            display.textContent = "help";  // Add Easter Egg
+        } else {
+            populateDisplay(result);
+        }    
+        secondNumber = "";
+        firstNumber = "";
+        newResult = true;
+    }
+}
+
 // Populate and clear display areas
 function clearDisplay() {
     const display = document.getElementById("displayNumber");
     display.textContent = "0";
+    newResult = true;
 }
 
 function populateDisplay(num) {
     const display = document.getElementById("displayNumber");
-    if (display.textContent == "0" && num == ".") {
-        display.textContent += num;
-    } else if (display.textContent == "0") {
-        display.textContent = num;
+    if (!newResult) {
+        drawDisplay();
     } else {
-        display.textContent += num;
+        newResult = false;
+        clearDisplay();
+        drawDisplay();
+    }
+    
+    function drawDisplay() {
+        newResult = false;
+        if (display.textContent == "0" && num == ".") {
+            display.textContent += num;
+        } else if (display.textContent == "0") {
+            display.textContent = num;
+        } else {
+            display.textContent += num;
+        }
     }
 }
 
@@ -220,44 +428,12 @@ function clearEquation() {
     equation.textContent = "";
 }
 
-function populateEquation(num, operation) {
+function populateEquation(...args) {
     const equation = document.getElementById("equationDisplay");
-    let symbol = "";
+    let inputs = args;
 
-    if (operation == addition) { 
-        symbol = " + ";
-        updateText(num, symbol);
-    } 
-    else if (operation == subtraction) { 
-        symbol = " - ";
-        updateText(num, symbol);
-    } 
-    else if (operation == multiplication) { 
-        symbol = " * ";
-        updateText(num, symbol);
-    } 
-    else if (operation == division) { 
-        symbol = " / ";
-        updateText(num, symbol);
-    } 
-    else if (operation == square) {
-        symbol = "^2";
-        updateText(num, symbol);
-    }  
-    else if (operation == squareroot) { 
-        symbol = "√";
-        updateText(symbol, num);
-    }
-    else if (operation == exponent) { 
-        symbol = "^";
-        updateText(num, symbol);
-    } 
-    else if (operation == factorial) { 
-        symbol = "!";
-        updateText(num, symbol);
-    } 
-
-    function updateText(a, b) {
-        equation.textContent = a + b;
+    clearEquation();
+    for (i = 0; i < args.length; i++) {
+        equation.textContent += inputs[i];
     }
 }

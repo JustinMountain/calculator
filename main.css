@@ -1,20 +1,20 @@
 .container {
     background-color: red;
-    width: 500px;
-    height: 700px;
+    width: 300px;
+    height: 450px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr 2fr 1fr repeat(5, 2fr);
     grid-template-areas: 
         "equation equation equation equation equation"
         "display display display display display"
-        "content-left content-left content-right content-right content-right"
+        "content-left content-left content-left content-right content-right"
         "allClear clear plusMinus exponent square"
         "seven eight nine multiplication sqrt"
         "four five six division factorial"
         "one two three subtraction equals"
         "doubleZero zero decimal addition equals";
-    margin: 1em auto;
+    margin: 2em auto;
     padding: 1em 1em 2em 1em;
 }
 
@@ -69,7 +69,7 @@
     justify-content: flex-end;
     align-items: center;
     margin: 0.5em;
-    padding-right: 1em;
+    /* padding-right: 1em; */
     grid-area: content-right;
 }
 
