@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+html {
+    font-family: 'Roboto Mono', monospace;
+}
+
 .container {
     background-color: red;
     width: 300px;
@@ -24,15 +30,11 @@
     align-items: center;
     margin: 0.5em;
     cursor: pointer;
+    background-color: lightblue;
 }
 
 .super {
     padding-bottom: 1em;
-}
-
-.minusAdjust {
-    padding-left: 0.5rem;
-    font-size: 2rem;
 }
 
 .equation {
@@ -42,7 +44,8 @@
     padding: 0 1em;
     margin: 0.5em 0.5em 0 0.5em;
     grid-area: equation;
-    background-color: blue;
+    background-color: lightblue;
+    flex-wrap: nowrap;
 }
 
 .display {
@@ -53,7 +56,7 @@
     padding: 0 1rem;
     margin: 0 0.5rem 0.5rem 0.5rem;
     grid-area: display;
-    background-color: blue;
+    background-color: lightblue;
 }
 
 .contentLeft {
@@ -73,119 +76,104 @@
     grid-area: content-right;
 }
 
+.empty {
+    background-color: orange;
+}
+
+.math {
+    background-color: blue;
+}
+
 #allClear {
     grid-area: allClear;
-    background-color: lightblue;
 }
 
 #clear {
     grid-area: clear;
-    background-color: lightblue;
 }
 
 #plusMinus {
     grid-area: plusMinus;
-    background-color: lightblue;
 }
 
 #exponent {
     grid-area: exponent;
-    background-color: lightblue;
 }
 
 #square {
     grid-area: square;
-    background-color: lightblue;
 }
 
 #seven {
     grid-area: seven;
-    background-color: lightblue;
 }
 
 #eight {
     grid-area: eight;
-    background-color: lightblue;
 }
 
 #nine {
     grid-area: nine;
-    background-color: lightblue;
 }
 
 #multiplication {
     grid-area: multiplication;
-    background-color: lightblue;
 }
 
 #sqrt {
     grid-area: sqrt;
-    background-color: lightblue;
 }
 
 #four {
     grid-area: four;
-    background-color: lightblue;
 }
 
 #five {
     grid-area: five;
-    background-color: lightblue;
 }
 
 #six {
     grid-area: six;
-    background-color: lightblue;
 }
 
 #division {
     grid-area: division;
-    background-color: lightblue;
 }
 
 #factorial {
     grid-area: factorial;
-    background-color: lightblue;
 }
 
 #one {
     grid-area: one;
-    background-color: lightblue;
 }
 
 #two {
     grid-area: two;
-    background-color: lightblue;
 }
 
 #three {
     grid-area: three;
-    background-color: lightblue;
 }
 
 #subtraction {
     grid-area: subtraction;
-    background-color: lightblue;
 }
 
 #doubleZero {
     grid-area: doubleZero;
-    background-color: lightblue;
 }
 
 #zero {
     grid-area: zero;
-    background-color: lightblue;
 }
 
 #decimal {
     grid-area: decimal;
-    background-color: lightblue;
 }
 
 #addition {
     grid-area: addition;
-    background-color: lightblue;
 }
 
 #equals {

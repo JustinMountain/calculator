@@ -1,13 +1,17 @@
 TODO:
-- Fix huge decimal points / Create limit for number of digits
-  - Setup a check on populateEquation for string.length
-  - Round long decimal points
-  - These two may need special interaction coded depending on length of the int before "."
+- Link made by Justin to GitHub
+- Make on/off toggle function
 - Make beautiful
-  - Add stacked previous executions in hidden overflow divs?
-BUG: Number, followed by an operation, followed by equals*2 results in NaN
-    - likely something wrong with returnResults();
-      - Indeed it does: I reset firstNumber and secondNumber to avoid unexpected recursion, but it causes this issue (line 575)
+- Make a traditional/futuristic aesthetic toggle
+- Add Easter Eggs
+    
+2021-05-31
+- Added the checkLength() function:
+  - Numbers equal to or greater than 100,000,000 or converted to exponential values
+  - Numbers that are longer than 12 are truncated to an appropriate number of decimal points 
+- Fixed bug: Pressing the equals key multiple times in a row will now loop as expected
+- Fixed bug: Keyboard shortcut for "." now works as intended
+- Fixed bug: display no longer clears when inputting only a number and hitting return. This allows the number to be carried forward to a function as expected.
 
 2021-05-30
 - Added keyboard support

@@ -210,7 +210,6 @@ allClearButton.addEventListener('click', event => {
 document.addEventListener('keydown', keyboardSupport);
 
 function keyboardSupport(e) {
-    console.log(e);
     if (e.key == "Enter") { returnResults(); }
     else if (e.key == 1) { populateDisplay(1); }
     else if (e.key == 2) { populateDisplay(2); }
@@ -222,6 +221,12 @@ function keyboardSupport(e) {
     else if (e.key == 8) { populateDisplay(8); }
     else if (e.key == 9) { populateDisplay(9); }
     else if (e.key == 0) { populateDisplay(0); }
+    else if (e.key == ".") { 
+        const display = document.getElementById("displayNumber");
+        if (!display.textContent.includes(".")) {
+            populateDisplay(".");
+        } else { return; }
+    }
     else if (e.key == "Backspace") { 
         clearDisplay();
     }
@@ -536,24 +541,44 @@ function operate(...args) {
 
 function returnResults() {
     
+    if (functionHolder == multiplication) { symbol = " * "}
+    else if (functionHolder == division) { symbol = " / "}
+    else if (functionHolder == subtraction) { symbol = " - "}
+    else if (functionHolder == addition) { symbol = " + "}
+    else if (functionHolder == square) { symbol = "^2"}
+    else if (functionHolder == squareroot) { symbol = "√"}
+    else if (functionHolder == factorial) { symbol = "!"}
+    else if (functionHolder == exponent) { symbol = "^ "}
+
     const display = document.getElementById("displayNumber");
 
     if (!functionHolder) {
         firstNumber = parseFloat(display.textContent);
         populateEquation(firstNumber);
+        newResult = true;
+    } else if (!firstNumber) {
+        // Allows looping as expected on multiple returnResults()
+        firstNumber = parseFloat(display.textContent);
+        let result = operate(functionHolder, secondNumber, firstNumber);
+        // Populate the equation 
+        if (functionHolder == square || functionHolder == factorial) {
+            populateEquation(firstNumber, symbol);
+        } else if (functionHolder == squareroot) {
+            populateEquation(symbol, firstNumber);
+        } else {
+            populateEquation(firstNumber, symbol, secondNumber);
+        }
         clearDisplay();
+        if (functionHolder == squareroot && firstNumber < 0) {
+            display.textContent = "help";  // Add Easter Egg
+        } else {
+            populateDisplay(result);
+        }    
+        firstNumber = "";
+        newResult = true;
     } else {
         secondNumber = firstNumber;
         firstNumber = parseFloat(display.textContent);
-
-        if (functionHolder == multiplication) { symbol = " * "}
-        else if (functionHolder == division) { symbol = " / "}
-        else if (functionHolder == subtraction) { symbol = " - "}
-        else if (functionHolder == addition) { symbol = " + "}
-        else if (functionHolder == square) { symbol = "^2"}
-        else if (functionHolder == squareroot) { symbol = "√"}
-        else if (functionHolder == factorial) { symbol = "!"}
-        else if (functionHolder == exponent) { symbol = "^ "}
 
         let result = operate(functionHolder, firstNumber, secondNumber);
 
@@ -563,16 +588,15 @@ function returnResults() {
         } else if (functionHolder == squareroot) {
             populateEquation(symbol, firstNumber);
         } else {
-            populateEquation(secondNumber, symbol, firstNumber, " = ", result);
+            populateEquation(secondNumber, symbol, firstNumber);
         }
         clearDisplay();
         if (functionHolder == squareroot && firstNumber < 0) {
-            const display = document.getElementById("displayNumber");
             display.textContent = "help";  // Add Easter Egg
         } else {
             populateDisplay(result);
         }    
-        secondNumber = "";
+        secondNumber = firstNumber;
         firstNumber = "";
         newResult = true;
     }
@@ -586,6 +610,9 @@ function clearDisplay() {
 }
 
 function populateDisplay(num) {
+
+    num = checkLength(num);
+
     const display = document.getElementById("displayNumber");
     if (!newResult) {
         drawDisplay();
@@ -618,6 +645,21 @@ function populateEquation(...args) {
 
     clearEquation();
     for (i = 0; i < args.length; i++) {
+        inputs[i] = checkLength(inputs[i]);
         equation.textContent += inputs[i];
     }
+}
+
+function checkLength(num) {
+    let numLength = num.toString();
+    // Add check for length of (result) string from returnResults() here
+    if (num > "99999999") {
+        num = num.toExponential(5);
+    } else if (numLength.length >= 13) {
+        // search for "." to determine how much to round by 
+        let position = numLength.indexOf(".");
+        let trunc = 11 - position;
+        num = num.toFixed(trunc);
+    }
+    return num;
 }
