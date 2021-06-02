@@ -1,10 +1,16 @@
 TODO:
-- Link made by Justin to GitHub
-- Make on/off toggle function
 - Make beautiful
 - Make a traditional/futuristic aesthetic toggle
 - Add Easter Eggs
+BUG: If page is reset while calculator is on, the toggle doesn't reset position
     
+2021-06-02 
+- On/Off toggle implemented
+- Established CSS variables to control colors
+- Setup link to GitHub
+- Fixed bug: Exponent function now properly computes when forwarding to another function
+- Fixed bug: Exponent, square, and squareroot now function properly
+
 2021-05-31
 - Added the checkLength() function:
   - Numbers equal to or greater than 100,000,000 or converted to exponential values

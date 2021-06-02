@@ -1,11 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-html {
+:root {
     font-family: 'Roboto Mono', monospace;
+    box-sizing: border-box;
+    --textColor: black;
+    --calculatorColor: red;
+    --displayColor: lightblue;
+    --numberColor: lightblue;
+    --functionColor: blue;
+    --clearColor: orange;
+    --equalsColor: gold;
+    --offColor: lightgray;
+    --borderRadius: 0.25em;
 }
 
+a {
+    text-decoration: none;
+    color: var(--textColor);
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+/* Calculator Styling */
 .container {
-    background-color: red;
+    background-color: var(--calculatorColor);
     width: 300px;
     height: 450px;
     display: grid;
@@ -24,31 +45,21 @@ html {
     padding: 1em 1em 2em 1em;
 }
 
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0.5em;
-    cursor: pointer;
-    background-color: lightblue;
-}
-
-.super {
-    padding-bottom: 1em;
-}
 
 .equation {
+    position: relative;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 0 1em;
     margin: 0.5em 0.5em 0 0.5em;
     grid-area: equation;
-    background-color: lightblue;
+    background-color: var(--displayColor);
     flex-wrap: nowrap;
 }
 
 .display {
+    position: relative;
     font-size: 2rem;
     display: flex;
     justify-content: flex-end;
@@ -56,7 +67,13 @@ html {
     padding: 0 1rem;
     margin: 0 0.5rem 0.5rem 0.5rem;
     grid-area: display;
-    background-color: lightblue;
+    background-color: var(--displayColor);
+}
+
+.off {
+    background-color: var(--offColor);
+    color: var(--offColor);
+    user-select: none;
 }
 
 .contentLeft {
@@ -76,107 +93,191 @@ html {
     grid-area: content-right;
 }
 
-.empty {
-    background-color: orange;
+/* Buttons */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5em;
+    cursor: pointer;
 }
 
-.math {
-    background-color: blue;
+.btn::before {
+
 }
 
+/* Button IDs */
 #allClear {
     grid-area: allClear;
+    background-color: var(--clearColor);
 }
 
 #clear {
     grid-area: clear;
+    background-color: var(--clearColor);
 }
 
 #plusMinus {
     grid-area: plusMinus;
+    background-color: var(--functionColor);
 }
 
 #exponent {
     grid-area: exponent;
+    background-color: var(--functionColor);
 }
 
 #square {
     grid-area: square;
+    background-color: var(--functionColor);
 }
 
 #seven {
     grid-area: seven;
+    background-color: var(--numberColor);
 }
 
 #eight {
     grid-area: eight;
+    background-color: var(--numberColor);
 }
 
 #nine {
     grid-area: nine;
+    background-color: var(--numberColor);
 }
 
 #multiplication {
     grid-area: multiplication;
+    background-color: var(--functionColor);
 }
 
 #sqrt {
     grid-area: sqrt;
+    background-color: var(--functionColor);
 }
 
 #four {
     grid-area: four;
+    background-color: var(--numberColor);
 }
 
 #five {
     grid-area: five;
+    background-color: var(--numberColor);
 }
 
 #six {
     grid-area: six;
+    background-color: var(--numberColor);
 }
 
 #division {
     grid-area: division;
+    background-color: var(--functionColor);
 }
 
 #factorial {
     grid-area: factorial;
+    background-color: var(--functionColor);
 }
 
 #one {
     grid-area: one;
+    background-color: var(--numberColor);
 }
 
 #two {
     grid-area: two;
+    background-color: var(--numberColor);
 }
 
 #three {
     grid-area: three;
+    background-color: var(--numberColor);
 }
 
 #subtraction {
     grid-area: subtraction;
+    background-color: var(--functionColor);
 }
 
 #doubleZero {
     grid-area: doubleZero;
+    background-color: var(--numberColor);
 }
 
 #zero {
     grid-area: zero;
+    background-color: var(--numberColor);
 }
 
 #decimal {
     grid-area: decimal;
+    background-color: var(--numberColor);
 }
 
 #addition {
     grid-area: addition;
+    background-color: var(--functionColor);
 }
 
 #equals {
     grid-area: equals;
-    background-color: gold;
+    background-color: var(--equalsColor);
+}
+
+/* On-Off Toggle */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 2.75em;
+    height: 1.5em;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle span {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--offColor);
+    border-radius: var(--borderRadius);
+    transition: .4s;
+    box-shadow: 0 0 2px black inset;
+}
+
+.toggle span::before {
+    position: absolute;
+    content: "";
+    height: 1em;
+    width: 1em;
+    left: 0.25em;
+    bottom: 0.25em;
+    background-color: var(--calculatorColor);
+    border-radius: var(--borderRadius);
+    transition: .4s;
+    box-shadow: 
+        0 0 2px black,
+        0 0 2px black inset;
+}
+
+.toggle input:checked + span {
+    background-color: var(--equalsColor);
+}
+
+.toggle input:checked + span:before {
+    transform: translateX(1.25em);
+}
+
+/* Extra Styling */
+.super {
+    padding-bottom: 1em;
 }

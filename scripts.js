@@ -19,7 +19,7 @@ multipButton.addEventListener('click', event => {
         functionHolder = multiplication;
         populateEquation(firstNumber, " * ");
     } else {
-        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition || functionHolder == exponent) {
             returnResults();
         }
         firstNumber = parseFloat(display.textContent);
@@ -41,7 +41,7 @@ divideButton.addEventListener('click', event => {
         functionHolder = division;
         populateEquation(firstNumber, " / ");
     } else {
-        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition || functionHolder == exponent) {
             returnResults();
         }
         firstNumber = parseFloat(display.textContent);
@@ -63,7 +63,7 @@ minusButton.addEventListener('click', event => {
         functionHolder = subtraction;
         populateEquation(firstNumber, " - ");
     } else {
-        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition || functionHolder == exponent) {
             returnResults();
         }
         firstNumber = parseFloat(display.textContent);
@@ -85,7 +85,7 @@ addButton.addEventListener('click', event => {
         functionHolder = addition;
         populateEquation(firstNumber, " + ");
     } else {
-        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition || functionHolder == exponent) {
             returnResults();
         }
         firstNumber = display.textContent;
@@ -107,7 +107,7 @@ exponentButton.addEventListener('click', event => {
         functionHolder = exponent;
         populateEquation(firstNumber, "^ ");
     } else {
-        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition || functionHolder == exponent) {
             returnResults();
         }
         firstNumber = parseFloat(display.textContent);
@@ -126,7 +126,7 @@ squareButton.addEventListener('click', event => {
         functionHolder = square;
         returnResults();
     } else {
-        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition || functionHolder == exponent) {
             returnResults();
         }
         firstNumber = parseFloat(display.textContent);
@@ -145,7 +145,7 @@ sqrtButton.addEventListener('click', event => {
         functionHolder = squareroot;
         returnResults();
     } else {
-        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition || functionHolder == exponent) {
             returnResults();
         }
         firstNumber = parseFloat(display.textContent);
@@ -164,7 +164,7 @@ factorialButton.addEventListener('click', event => {
         functionHolder = factorial;
         returnResults();
     } else {
-        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition) {
+        if (functionHolder == multiplication || functionHolder == division || functionHolder == subtraction || functionHolder == addition || functionHolder == exponent) {
             returnResults();
         }
         firstNumber = parseFloat(display.textContent);
@@ -645,8 +645,12 @@ function populateEquation(...args) {
 
     clearEquation();
     for (i = 0; i < args.length; i++) {
-        inputs[i] = checkLength(inputs[i]);
-        equation.textContent += inputs[i];
+        if (inputs[i] == "^2" || inputs[i] == "^ " | inputs[i] == "√") {
+            equation.textContent += inputs[i];    
+        } else {
+            inputs[i] = checkLength(inputs[i]);
+            equation.textContent += inputs[i];    
+        }
     }
 }
 
@@ -663,3 +667,13 @@ function checkLength(num) {
     }
     return num;
 }
+
+// On-Off Switch
+const onOffToggle = document.querySelector("#on-off");
+onOffToggle.addEventListener("click", () => {
+    equationSpace = document.getElementById("equationDisplay");
+    equationSpace.classList.toggle("off");
+
+    displaySpace = document.getElementById("displayNumber");
+    displaySpace.classList.toggle("off");
+});
