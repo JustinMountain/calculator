@@ -676,4 +676,6 @@ onOffToggle.addEventListener("click", () => {
 
     displaySpace = document.getElementById("displayNumber");
     displaySpace.classList.toggle("off");
+    clearEquation();
+    clearDisplay();
 });

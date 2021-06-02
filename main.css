@@ -4,19 +4,29 @@
     font-family: 'Roboto Mono', monospace;
     box-sizing: border-box;
     --textColor: black;
-    --calculatorColor: red;
-    --displayColor: lightblue;
-    --numberColor: lightblue;
-    --functionColor: blue;
-    --clearColor: orange;
+    --calculatorColor: rgb(52, 52, 180);
+    --calculatorShadowColor: rgb(44, 44, 151);
+    --displayColor: rgb(218, 230, 173);
+    --numberColor: beige;
+    --numberShadowColor:rgb(207, 207, 186);
+    --functionColor: rgb(63, 63, 63);
+    --functionShadowColor: rgb(36, 36, 36);
+    --clearColor: rgb(255, 94, 0);
+    --clearShadowColor: rgb(223, 82, 0);
     --equalsColor: gold;
+    --equalsShadowColor: rgb(206, 175, 1);
     --offColor: lightgray;
-    --borderRadius: 0.25em;
+    --borderRadius: 0.125em;
+    --buttonBorder: black;
+    --transitionSpeed: 0.2s;
 }
 
 a {
     text-decoration: none;
-    color: var(--textColor);
+    color: white;
+    text-shadow: 
+        1px 1px var(--functionShadowColor),
+        2px 2px var(--functionShadowColor);
 }
 
 a:hover,
@@ -42,9 +52,19 @@ a:focus {
         "one two three subtraction equals"
         "doubleZero zero decimal addition equals";
     margin: 2em auto;
-    padding: 1em 1em 2em 1em;
+    padding: 1em 1em 1em 1em;
+    border: 1px solid var(--textColor);
+    border-radius: 1em;
+    box-shadow: 
+        1px 1px var(--calculatorShadowColor),
+        2px 2px var(--calculatorShadowColor),
+        3px 3px var(--calculatorShadowColor),
+        4px 4px var(--textColor),
+        5px 5px var(--calculatorShadowColor),
+        6px 6px var(--calculatorShadowColor),
+        7px 7px var(--calculatorShadowColor),
+        8px 8px var(--textColor);
 }
-
 
 .equation {
     position: relative;
@@ -56,6 +76,9 @@ a:focus {
     grid-area: equation;
     background-color: var(--displayColor);
     flex-wrap: nowrap;
+    box-shadow: 
+        inset 3px 3px var(--textColor),
+        inset -1px 0px var(--textColor);
 }
 
 .display {
@@ -68,6 +91,9 @@ a:focus {
     margin: 0 0.5rem 0.5rem 0.5rem;
     grid-area: display;
     background-color: var(--displayColor);
+    box-shadow: 
+        inset 3px -1px var(--textColor),
+        inset -1px 0px var(--textColor);
 }
 
 .off {
@@ -81,6 +107,7 @@ a:focus {
     justify-content: flex-start;
     align-items: center;
     margin: 0.5em;
+    padding-left: 0.5em;
     grid-area: content-left;
 }
 
@@ -89,7 +116,6 @@ a:focus {
     justify-content: flex-end;
     align-items: center;
     margin: 0.5em;
-    /* padding-right: 1em; */
     grid-area: content-right;
 }
 
@@ -100,11 +126,84 @@ a:focus {
     align-items: center;
     margin: 0.5em;
     cursor: pointer;
+    border-radius: var(--borderRadius);
 }
 
-.btn::before {
-
+.empty {
+    border: 1px solid var(--clearShadowColor);
+    box-shadow: 
+        1px 1px var(--clearShadowColor),
+        2px 2px var(--clearShadowColor),
+        3px 3px var(--clearShadowColor),
+        4px 4px var(--clearShadowColor),
+        5px 5px var(--clearShadowColor);
 }
+
+.empty:hover,
+.empty:focus {
+    transform: translate3d(2px, 2px, 0);
+    box-shadow: 
+        1px 1px var(--clearShadowColor),
+        2px 2px var(--clearShadowColor),
+        3px 3px var(--clearShadowColor);
+    }
+
+.empty:active {
+    transform: translate3d(4px, 4px, 0);
+    box-shadow: 
+        1px 1px var(--clearShadowColor);
+    }
+
+.functions {
+    color: white;
+    border: 1px solid var(--functionShadowColor);
+    box-shadow: 
+        1px 1px var(--functionShadowColor),
+        2px 2px var(--functionShadowColor),
+        3px 3px var(--functionShadowColor),
+        4px 4px var(--functionShadowColor),
+        5px 5px var(--functionShadowColor);
+}
+
+.functions:hover,
+.functions:focus {
+    transform: translate3d(2px, 2px, 0);
+    box-shadow: 
+        1px 1px var(--functionShadowColor),
+        2px 2px var(--functionShadowColor),
+        3px 3px var(--functionShadowColor);
+    }
+
+.functions:active {
+    transform: translate3d(4px, 4px, 0);
+    box-shadow: 
+        1px 1px var(--functionShadowColor);
+    }
+
+.number {
+    border: 1px solid var(--numberShadowColor);
+    box-shadow: 
+        1px 1px var(--numberShadowColor),
+        2px 2px var(--numberShadowColor),
+        3px 3px var(--numberShadowColor),
+        4px 4px var(--numberShadowColor),
+        5px 5px var(--numberShadowColor);
+}
+
+.number:hover,
+.number:focus {
+    transform: translate3d(2px, 2px, 0);
+    box-shadow: 
+        1px 1px var(--numberShadowColor),
+        2px 2px var(--numberShadowColor),
+        3px 3px var(--numberShadowColor);
+    }
+
+.number:active {
+    transform: translate3d(4px, 4px, 0);
+    box-shadow: 
+        1px 1px var(--numberShadowColor);
+    }
 
 /* Button IDs */
 #allClear {
@@ -224,7 +323,7 @@ a:focus {
 
 #equals {
     grid-area: equals;
-    background-color: var(--equalsColor);
+    background-color: var(--clearColor);
 }
 
 /* On-Off Toggle */
@@ -250,31 +349,37 @@ a:focus {
     bottom: 0;
     background-color: var(--offColor);
     border-radius: var(--borderRadius);
-    transition: .4s;
+    transition: var(--transitionSpeed);
     box-shadow: 0 0 2px black inset;
+    box-shadow: 
+        inset 1px 1px var(--textColor),
+        inset -1px 0px var(--textColor);
 }
 
 .toggle span::before {
     position: absolute;
     content: "";
-    height: 1em;
-    width: 1em;
-    left: 0.25em;
-    bottom: 0.25em;
-    background-color: var(--calculatorColor);
+    height: 1.125em;
+    width: 1.125em;
+    left: 0.125em;
+    bottom: 0.125em;
+    background-color: var(--numberColor);
     border-radius: var(--borderRadius);
-    transition: .4s;
+    transition: var(--transitionSpeed);
+    transition-timing-function: cubic-bezier(.7, .8, .9, 0);
+    border: 1px solid var(--textColor);
     box-shadow: 
-        0 0 2px black,
-        0 0 2px black inset;
+        1px 1px var(--textColor);
 }
 
 .toggle input:checked + span {
-    background-color: var(--equalsColor);
+    background-color: var(--clearColor);
 }
 
 .toggle input:checked + span:before {
     transform: translateX(1.25em);
+    box-shadow: 
+        0px 0px var(--textColor)
 }
 
 /* Extra Styling */

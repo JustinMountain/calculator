@@ -1,11 +1,13 @@
 TODO:
-- Make beautiful
-- Make a traditional/futuristic aesthetic toggle
 - Add Easter Eggs
+- Make Table of Contents for CSS and JS files
+- Make a traditional/futuristic aesthetic toggle
 BUG: If page is reset while calculator is on, the toggle doesn't reset position
     
 2021-06-02 
+- CSS Styling for calculator has been completed
 - On/Off toggle implemented
+  - Correctly clears display and equation space when toggled
 - Established CSS variables to control colors
 - Setup link to GitHub
 - Fixed bug: Exponent function now properly computes when forwarding to another function
