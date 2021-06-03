@@ -1,3 +1,15 @@
+// Table of Contents
+
+// Parameters
+// Math Buttons
+// Clear buttons
+// Keyboard Support
+// Number Buttons
+// Math Functions 
+// Master Operation
+// Populate and clear display areas
+// On-Off Switch
+
 // Parameters
 let displayValue = "";
 let firstNumber = "";
@@ -492,7 +504,7 @@ function multiplication(num1, num2) {
     return num1 * num2;
 }
 
-function division(num2, num1) {
+function division(num2, num1) {    
     if (num2 == 0) {
         return "ERROR" // Add Easter Egg
     } else { return num1 / num2; }
@@ -512,7 +524,10 @@ function exponent(num2, num1) {
 
 function factorial(num1) {
     let result = 1;
-    if (num1 == 0) {
+    if (num1 == "Infinity") {
+        window.alert("You broke the universe");
+        return 1;
+    } else if (num1 == 0) {
         return result;
     } else if (num1 < 0) {
         num1 *= -1;
@@ -555,8 +570,9 @@ function returnResults() {
     if (!functionHolder) {
         firstNumber = parseFloat(display.textContent);
         populateEquation(firstNumber);
+
         newResult = true;
-    } else if (!firstNumber) {
+    } else if (typeof firstNumber !== 'number') {
         // Allows looping as expected on multiple returnResults()
         firstNumber = parseFloat(display.textContent);
         let result = operate(functionHolder, secondNumber, firstNumber);
@@ -570,14 +586,14 @@ function returnResults() {
         }
         clearDisplay();
         if (functionHolder == squareroot && firstNumber < 0) {
-            display.textContent = "help";  // Add Easter Egg
+            display.textContent = "0";
         } else {
             populateDisplay(result);
         }    
         firstNumber = "";
         newResult = true;
     } else {
-        secondNumber = firstNumber;
+        secondNumber = parseFloat(firstNumber);
         firstNumber = parseFloat(display.textContent);
 
         let result = operate(functionHolder, firstNumber, secondNumber);
@@ -588,11 +604,12 @@ function returnResults() {
         } else if (functionHolder == squareroot) {
             populateEquation(symbol, firstNumber);
         } else {
-            populateEquation(secondNumber, symbol, firstNumber);
+            populateEquation(secondNumber, symbol, firstNumber);            
         }
+
         clearDisplay();
         if (functionHolder == squareroot && firstNumber < 0) {
-            display.textContent = "help";  // Add Easter Egg
+            display.textContent = "0";
         } else {
             populateDisplay(result);
         }    
@@ -664,18 +681,28 @@ function checkLength(num) {
         let position = numLength.indexOf(".");
         let trunc = 11 - position;
         num = num.toFixed(trunc);
-    }
+    } else { return num; }
     return num;
 }
 
 // On-Off Switch
 const onOffToggle = document.querySelector("#on-off");
-onOffToggle.addEventListener("click", () => {
-    equationSpace = document.getElementById("equationDisplay");
-    equationSpace.classList.toggle("off");
+onOffToggle.addEventListener("change", () => {
+    if (onOffToggle.checked) {
+        equationSpace = document.getElementById("equationDisplay");
+        equationSpace.classList.remove("off");
+    
+        displaySpace = document.getElementById("displayNumber");
+        displaySpace.classList.remove("off");
+        clearEquation();
+        clearDisplay();
+    } else {
+        equationSpace = document.getElementById("equationDisplay");
+        equationSpace.classList.add("off");
 
-    displaySpace = document.getElementById("displayNumber");
-    displaySpace.classList.toggle("off");
-    clearEquation();
-    clearDisplay();
+        displaySpace = document.getElementById("displayNumber");
+        displaySpace.classList.add("off");
+        clearEquation();
+        clearDisplay();
+    }
 });

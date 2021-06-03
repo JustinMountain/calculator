@@ -1,9 +1,16 @@
 TODO:
-- Add Easter Eggs
-- Make Table of Contents for CSS and JS files
 - Make a traditional/futuristic aesthetic toggle
-BUG: If page is reset while calculator is on, the toggle doesn't reset position
     
+2021-06-03
+- Implented Table of Contents for easier searching in CSS and JS files
+- Added a small easter egg to prevent crashes
+- Minor tweaks to button acuation and aesthetics
+- Bug fixed: If page is reset while calculator is on, the toggle would work opposite to expection (always worked as intended in chrome)
+  - Changed the toggle class to be dependent on the checkbox; the animation position still doesn't reset, but the checkbox behavior works as expected
+- Bug fixed: Two-number functions now work as intended when the first number is "0"
+  - My condition was checking >>if (!firstNumber)<< which was registering as false when firstNumber == 0
+  - The solution was to check specifically if firstNumber was a number or not
+
 2021-06-02 
 - CSS Styling for calculator has been completed
 - On/Off toggle implemented

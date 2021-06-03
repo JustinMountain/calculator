@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
+/* Table of Contents */
+
+/* Calculator Styling */
+/* Buttons */
+/* Button IDs */
+/* On-Off Toggle */
+/* Extra Styling */
+
 :root {
     font-family: 'Roboto Mono', monospace;
     box-sizing: border-box;
@@ -27,11 +35,6 @@ a {
     text-shadow: 
         1px 1px var(--functionShadowColor),
         2px 2px var(--functionShadowColor);
-}
-
-a:hover,
-a:focus {
-    text-decoration: underline;
 }
 
 /* Calculator Styling */
@@ -87,6 +90,7 @@ a:focus {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    overflow-wrap: anywhere;    
     padding: 0 1rem;
     margin: 0 0.5rem 0.5rem 0.5rem;
     grid-area: display;
@@ -130,77 +134,65 @@ a:focus {
 }
 
 .empty {
-    border: 1px solid var(--clearShadowColor);
+    background-color: var(--clearColor);
+    border: 1px solid var(--functionShadowColor);
     box-shadow: 
         1px 1px var(--clearShadowColor),
         2px 2px var(--clearShadowColor),
         3px 3px var(--clearShadowColor),
-        4px 4px var(--clearShadowColor),
-        5px 5px var(--clearShadowColor);
+        4px 4px var(--clearShadowColor);
 }
 
 .empty:hover,
 .empty:focus {
-    transform: translate3d(2px, 2px, 0);
-    box-shadow: 
-        1px 1px var(--clearShadowColor),
-        2px 2px var(--clearShadowColor),
-        3px 3px var(--clearShadowColor);
+    background-color: var(--clearShadowColor);
     }
 
 .empty:active {
-    transform: translate3d(4px, 4px, 0);
+    transform: translate3d(3px, 3px, 0);
     box-shadow: 
         1px 1px var(--clearShadowColor);
     }
 
 .functions {
+    background-color: var(--functionColor);
     color: white;
     border: 1px solid var(--functionShadowColor);
     box-shadow: 
         1px 1px var(--functionShadowColor),
         2px 2px var(--functionShadowColor),
         3px 3px var(--functionShadowColor),
-        4px 4px var(--functionShadowColor),
-        5px 5px var(--functionShadowColor);
+        4px 4px var(--functionShadowColor);
 }
 
 .functions:hover,
 .functions:focus {
-    transform: translate3d(2px, 2px, 0);
-    box-shadow: 
-        1px 1px var(--functionShadowColor),
-        2px 2px var(--functionShadowColor),
-        3px 3px var(--functionShadowColor);
+    background-color: var(--functionShadowColor);
     }
 
 .functions:active {
-    transform: translate3d(4px, 4px, 0);
+    transform: translate3d(3px, 3px, 0);
     box-shadow: 
         1px 1px var(--functionShadowColor);
     }
 
 .number {
-    border: 1px solid var(--numberShadowColor);
+    background-color: var(--numberColor);
+    border: 1px solid var(--functionShadowColor);
     box-shadow: 
         1px 1px var(--numberShadowColor),
         2px 2px var(--numberShadowColor),
         3px 3px var(--numberShadowColor),
-        4px 4px var(--numberShadowColor),
-        5px 5px var(--numberShadowColor);
+        4px 4px var(--numberShadowColor);
 }
 
 .number:hover,
 .number:focus {
-    transform: translate3d(2px, 2px, 0);
-    box-shadow: 
-        1px 1px var(--numberShadowColor),
-        2px 2px var(--numberShadowColor),
-        3px 3px var(--numberShadowColor);
+    background-color: var(--numberShadowColor);
     }
 
 .number:active {
-    transform: translate3d(4px, 4px, 0);
+    transform: translate3d(3px, 3px, 0);
     box-shadow: 
         1px 1px var(--numberShadowColor);
     }
@@ -208,122 +200,98 @@ a:focus {
 /* Button IDs */
 #allClear {
     grid-area: allClear;
-    background-color: var(--clearColor);
 }
 
 #clear {
     grid-area: clear;
-    background-color: var(--clearColor);
 }
 
 #plusMinus {
     grid-area: plusMinus;
-    background-color: var(--functionColor);
 }
 
 #exponent {
     grid-area: exponent;
-    background-color: var(--functionColor);
 }
 
 #square {
     grid-area: square;
-    background-color: var(--functionColor);
 }
 
 #seven {
     grid-area: seven;
-    background-color: var(--numberColor);
 }
 
 #eight {
     grid-area: eight;
-    background-color: var(--numberColor);
 }
 
 #nine {
     grid-area: nine;
-    background-color: var(--numberColor);
 }
 
 #multiplication {
     grid-area: multiplication;
-    background-color: var(--functionColor);
 }
 
 #sqrt {
     grid-area: sqrt;
-    background-color: var(--functionColor);
 }
 
 #four {
     grid-area: four;
-    background-color: var(--numberColor);
 }
 
 #five {
     grid-area: five;
-    background-color: var(--numberColor);
 }
 
 #six {
     grid-area: six;
-    background-color: var(--numberColor);
 }
 
 #division {
     grid-area: division;
-    background-color: var(--functionColor);
 }
 
 #factorial {
     grid-area: factorial;
-    background-color: var(--functionColor);
 }
 
 #one {
     grid-area: one;
-    background-color: var(--numberColor);
 }
 
 #two {
     grid-area: two;
-    background-color: var(--numberColor);
 }
 
 #three {
     grid-area: three;
-    background-color: var(--numberColor);
 }
 
 #subtraction {
     grid-area: subtraction;
-    background-color: var(--functionColor);
 }
 
 #doubleZero {
     grid-area: doubleZero;
-    background-color: var(--numberColor);
 }
 
 #zero {
     grid-area: zero;
-    background-color: var(--numberColor);
 }
 
 #decimal {
     grid-area: decimal;
-    background-color: var(--numberColor);
 }
 
 #addition {
     grid-area: addition;
-    background-color: var(--functionColor);
 }
 
 #equals {
     grid-area: equals;
-    background-color: var(--clearColor);
 }
 
 /* On-Off Toggle */
